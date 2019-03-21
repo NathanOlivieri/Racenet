@@ -1,8 +1,13 @@
-let mongoose = require('mongoose');
- 
+const mongoose = require('mongoose');
+const User = require('./src/Models/userSchema'),
+      Event = require('./src/Models/eventSchema'),
+      express = require('express'),
+      app = express(),
+      PORT = 8080,
+      bodyParser = require('body-parser'),
+      cors = require('cors');
+
 mongoose.connect('mongodb://localhost/racenetdata');
-const userSchema = require('./src/Models/userSchema'),
-      eventSchema = require('./src/Models/eventSchema');
 
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -10,62 +15,85 @@ db.once('open', function() {
   // we're connected!
 });
 
-// var userSchema = new mongoose.Schema({
-//     name: {
-//         userName: String,
-//         firstName: String,
-//         lastName: String
-//     },
-//     upcomingEvents: Number,
-//     pastEvents: Number,
-//     dateJoined: String,
-//     golds: Number,
-//     goldEvents: Array,
-//     silvers: Number,
-//     silverEvents: Array,
-//     bronzes: Number,
-//     bronzeEvents: Array,
-//     score: Number
-// });
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+app.use(cors({
+    origin: 'http://localhost:3000'
+}));
+app.use(express.static('src/public'));
 
-// userSchema.methods.userScore = () => {
-//     let score = Math.abs((this.golds * 3) + 
-//                         (this.silvers * 2) + 
-//                         (this.bronzes))
-//     console.log(score);
-// }
+//GETREQ--SingleUserObject
+app.get('/users/:id', (req, res)=>{
+  let uid = req.params.id
+  User.findById(uid)
+    .populate("events")
+  .then(usr => {
+      res.json(usr);
+  })
+  .catch(err => {
+      console.log(err)
+  })
+});
+//GETREQ--Allusers
+app.get('/users', (req, res)=>{
+  User.find({})
+    .populate("events")
+  .then(usr => {
+      res.json(usr);
+  })
+  .catch(err => {
+      console.log(err)
+  })
+});
+//POST--newUser
+app.post('/users', (req, res)=>{
+  User.create(req.body).then((user) => {
+    res.send(user)
+  })
+  .catch(err => {
+    console.log(err)
+  })
+});
 
-let User = mongoose.model('User', userSchema);
-
-let newUser = new User({ 
-    name: {
-        userName: '99takumi',
-        firstName: 'test',
-        lastName: 'Olivieri'
-    },
-    upcomingEvents: 102,
-    pastEvents: 66,
-    dateJoined: 'Sep 20 2019',
-    golds: 10,
-    goldEvents: ['eventid', 'eventid2'],
-    silvers: 5,
-    silverEvents: ['eventid', 'eventid2'],
-    bronzes: 3,
-    bronzeEvents: ['eventid', 'eventid2']
+//----------------------------Eventsreqs-----------------------------------------
+//POST--newEvent
+app.post('/events', (req, res) => {
+  Event.create(req.body).then((event) => {
+    res.send(event)
+  })
+  .catch(err =>{
+    console.log(err)
+  })
 })
+//GETREQ--AllEvents
+app.get('/events', (req, res)=>{
+  Event.find({})
+    .populate("attending")
+  .then(evt => {
+      res.json(evt);
+  })
+  .catch(err => {
+      console.log(err)
+  })
+});
 
-// console.log(firstuser);
-//add doc to db using Schema
+//GETREQ--SingleEventObject
+app.get('/events/:id', (req, res)=>{
+  let eid = req.params.id
+  Event.findById(eid)
+    .populate("attending")
+  .then(evn => {
+      res.json(evn);
+  })
+  .catch(err => {
+      console.log(err)
+  })
+});
 
-newUser.save(function (err, res) {
-    if (err) return console.error(err);
-    console.log(`User ${newUser.name.userName} created!`)
-  });
 
-// userFinder = () => {
-// User.find(function (err, res) {
-//     if (err) return console.error(err);
-//     console.log(res);
-//   })}
 
-// userFinder();
+
+//onlyeabove^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app.listen(PORT, () => {
+  console.log(`server listening on PORT ${PORT}`)
+})

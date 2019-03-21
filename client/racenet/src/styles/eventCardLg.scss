@@ -1,0 +1,115 @@
+@import './variables.scss';
+
+.eCardLg {
+    width: 320px;
+    height: 160px;
+    background:linear-gradient(140.83deg, rgb(104, 207, 255) 10.17%,
+    rgba(255, 255, 255, 0) 101.01%), #b1b1fc;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    margin: 24px 0 24px 0;
+    display:flex;
+    
+    &--overlay {
+        position: absolute;
+        transform: skewX(15deg) rotate(5deg);
+        width: 300px;
+        height: 120px;
+        padding-top: 38px;
+        box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.65);
+        z-index: 9999;
+    }
+    &__left {
+        width: 160px;
+        height: 160px;
+        &__seperator {
+            box-sizing: border-box;
+            margin-left: 12.5%;
+            width:75%;
+            height: 0px;
+            border: 2px solid rgb(168, 168, 168);
+        }
+    }
+    &__left p{
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: 300;
+        font-size: 22px;
+        line-height: 26px;
+        margin: 20px 0 8px 0;
+        text-align: center;
+        color: #454545;
+    }
+    &__left h5{
+        width: 100%;
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 64px;
+        line-height: 66px;
+        text-align: center;
+        color: #fafafa;
+        margin: 8px 0 8px 0;
+    }
+    &__right {
+        box-sizing: border-box;
+        padding: 8px 8px 0 8px;
+        width: 160px;
+        height: 160px;
+        display: flex;
+        flex-flow: column;
+        justify-content: space-evenly;
+        &__title {
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 18px;
+            line-height: normal;
+            color: #2F2F2F;
+            margin:0;
+        }
+        &__type {
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 16px;
+            line-height: normal;
+            color: rgb(65, 65, 65);
+            margin:0;
+        }
+        &__location {
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 13px;
+            line-height: normal;
+            color: rgb(100, 100, 100);
+            margin:0;
+        }
+        &__attending {
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 20px;
+            line-height: 41px;
+            color: #2F2F2F;
+            margin:0;
+        }
+        &__icon {
+            height: 41px;
+            width: 41px;
+        }
+        &__addicon {
+            height: 41px;
+            width: 41px;
+            margin-left: 20px;
+        }
+    }
+}
+
+.flexr {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+}
+

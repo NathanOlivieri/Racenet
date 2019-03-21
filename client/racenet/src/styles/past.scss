@@ -1,0 +1,24 @@
+.pastEvents h2{
+    padding-left: 16px;
+}
+
+.pastEvents {
+    margin-top:100px;
+    &__icon{
+        width: 44px;
+        height: 39px;
+        margin-right: 8px;
+        transform: rotate(90deg);
+    }
+    &__list{
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+    }
+}
+
+.title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

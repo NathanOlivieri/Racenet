@@ -1,0 +1,201 @@
+@import './variables.scss';
+@keyframes myMove {
+    0%   {
+        background:linear-gradient(140.83deg, rgb(104, 207, 255) 10.17%,
+                rgba(255, 255, 255, 0) 101.01%), #b1b1fc;
+    };
+    100% {
+        background:linear-gradient(140.83deg, #8686f0 10.17%,
+        rgba(255, 255, 255, 0) 101.01%), rgb(92, 203, 255);
+    }
+    };
+.eventsPage {
+    @include bg;
+    width: 100vw;
+    height: auto;
+    &__header {
+        position: fixed;
+        z-index: 999;
+        width: 100vw;
+        height: 189px;
+        left: 0px;
+        top: -28px;
+        animation: myMove 10s ease infinite;
+        mix-blend-mode: normal;
+        border: none;
+        box-sizing: border-box;
+        box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.65);
+        border-radius: 25px;
+        border-bottom-left-radius: unset;
+        display: flex;
+        flex-flow: column;
+        justify-content: flex-end;
+        &--overlay{
+            width: 95vw;
+            height: 160px;
+            position: fixed;
+            right: 15px;
+            bottom: 510px;
+            box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.65);   
+            transform: skewX(-15deg) rotate(-5deg); 
+        }
+
+        &__img{
+            position: absolute;
+            width: 45px;
+            height: 50px;
+            left: 315px;
+            top: 32px;
+        }
+        &__seperator{         
+            position: absolute;
+            width: 323px;
+            height: 0px;
+            left: 26px;
+            top: 86px;
+            border: 1px solid #999999;
+        }
+    }
+    &__header h1 {
+        font-weight: bold;
+        font-size: 32px;
+        line-height: normal;
+        color: #4C4C4C;
+        box-sizing: border-box;
+        padding-left:24px;
+        padding-bottom: 40px;
+        margin: 0;
+        font-family: roboto;
+    }
+    &__header h3 {
+        position: absolute;
+        width: 274px;
+        height: 39px;
+        left: 24px;
+        top: 0px;
+        font-family: roboto;
+        font-style: normal;
+        font-weight: 200;
+        font-size: 36px;
+        line-height: normal;
+        color: #323232;
+
+    }
+    &__list {
+        box-sizing: border-box;
+        padding-top: 200px;
+        height: auto;
+        width: 100vw;
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        justify-content: space-around;
+    }
+}
+
+.addIcon {
+    position: fixed;
+    z-index: 1086;
+    top: 83vh;
+    right:39vw;
+    height: 90px;
+    width: 90px;
+    border-radius: 20px;
+    box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.65);
+}
+
+.addEvent {
+    @include bg;
+    width: 100vw;
+    height: auto;
+}
+.formdiv {
+    box-sizing: border-box;
+    padding-top: 200px;
+    &__title p{
+        color: #fafafa;
+        font-weight: 400;
+        font-size: 18px;
+        padding-left: 24px;
+    }
+    
+}
+.dateCont {
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+.dateCont p{
+    font-size: 32px;
+    font-weight: 300;
+    color: #fafafa;
+    padding-bottom: 36px;
+    padding-top: 36px;
+    margin: 0;
+}
+.formCont {
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    
+}
+.formCont label{
+    font-size: 32px;
+    font-weight: 300;
+    color: #fafafa;
+    padding-bottom: 36px;
+    padding-top: 36px;
+}
+.formCont input{
+    background:linear-gradient(140.83deg, rgb(104, 207, 255) 10.17%,
+                 rgba(255, 255, 255, 0) 101.01%), #b1b1fc;
+    opacity: 0.9;
+    height: 60px;
+    width: 275px;
+    border: none;
+    border-radius: 15px;
+    box-sizing: border-box;
+    padding-left: 32px;
+    box-shadow: 0px 3px 40px rgba(0, 0, 0, 0.65);
+    // &--overlay {
+    //     height: 50px;
+    //     width: 240px;  
+    //     background: #fafafa;
+    //     position: absolute;
+    //     top: 420px 
+    // }
+}
+
+.react-datepicker__input-container input{
+    background:linear-gradient(140.83deg, rgb(104, 207, 255) 10.17%,
+                 rgba(255, 255, 255, 0) 101.01%), #b1b1fc;
+    opacity: 0.4;
+    height: 60px;
+    width: 275px;
+    border: none;
+    border-radius: 15px;
+    box-sizing: border-box;
+    padding-left: 32px;
+    box-shadow: 0px 3px 40px rgba(0, 0, 0, 0.65);
+}
+
+
+.formbutton {
+    height: 60px;
+    width: 275px;
+    background:linear-gradient(140.83deg, rgb(104, 207, 255) 10.17%,
+                 rgba(255, 255, 255, 0) 101.01%), #b1b1fc;
+    // opacity: 0.4;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0px 3px 40px rgba(0, 0, 0, 0.65);
+    box-sizing: border-box;
+    margin: 32px 0 32px 0;
+}
+.formbutton h2{
+    color: #fafafa;
+}

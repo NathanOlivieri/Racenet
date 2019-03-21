@@ -1,0 +1,114 @@
+@import "./variables.scss";
+
+.proGold {
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+    height: 301px;
+    left: 0px;
+    top: -20px;
+    background: linear-gradient(136.62deg, #FDF0AA -7.98%, rgba(255, 255, 255, 0) 72.96%), #FFB74B;
+    mix-blend-mode: normal;
+    border: 1px solid rgba(144, 144, 144, 0.3);
+    box-sizing: border-box;
+    box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.86);
+    border-radius: 25px;
+    border: none;
+}
+
+.proSilver {
+    background: linear-gradient(123.99deg, #FFFFFF -8.51%, rgba(255, 255, 255, 0) 94.74%), #8B8B8B;    
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+    height: 301px;
+    left: 0px;
+    top: -20px;
+    mix-blend-mode: normal;
+    border: 1px solid rgba(144, 144, 144, 0.3);
+    box-sizing: border-box;
+    box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.86);
+    border-radius: 25px;
+    border: none;
+}
+
+.proBronze {
+    background: linear-gradient(203.7deg, #DACCB0 0%, rgba(255, 255, 255, 0) 102.93%), rgb(105, 60, 0);
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+    height: 301px;
+    left: 0px;
+    top: -20px;
+    mix-blend-mode: normal;
+    border: 1px solid rgba(144, 144, 144, 0.3);
+    box-sizing: border-box;
+    box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.86);
+    border-radius: 25px;
+    border: none;
+}
+
+
+.profile {
+    @include bg;
+    height: 100%;
+    &__hero {
+        position: fixed;
+        z-index: 999;
+        width: 100%;
+        height: 301px;
+        left: 0px;
+        top: -20px;
+        mix-blend-mode: normal;
+        border: 1px solid rgba(144, 144, 144, 0.3);
+        box-sizing: border-box;
+        box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.86);
+        border-radius: 25px;
+        border: none;
+        &__pp{
+            position: absolute;
+            width: 90px;
+            height: 90px;
+            left: 18px;
+            top: 140px;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 50px;
+        } 
+        &__h1 {
+        color: #313131;
+        box-sizing: border-box;
+        position: relative;
+        top: 226px;
+        width: 100%;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 28px;
+        line-height: normal;
+        padding-right: 16px;
+        padding-left: 16px;
+        }
+    }
+   
+    &__nav {
+        height: 80px;
+        width: 100vw;
+        &__icon {
+            z-index: 1000;
+            position: fixed;
+            width: 42px;
+            height: 42px;
+            left: 320px;
+            top: 8px;
+        }
+        &__logo {
+            position: absolute;
+            width: 86px;
+            height: 86px;
+            top: 16px;
+        }
+    }
+    &__upcoming{
+        margin-top: 268px;
+
+    }
+}

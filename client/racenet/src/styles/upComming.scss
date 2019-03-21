@@ -1,0 +1,27 @@
+@import './variables.scss';
+.up h2{
+    position: absolute;
+    width: 177px;
+    height: 22px;
+    left: 18px;
+    top: 306px;
+}
+.up{
+    // @include bg;
+    &__icon{
+        position: absolute;
+        width: 44px;
+        height: 39px;
+        left: 322px;
+        top: 310px;
+        fill: white;
+    }
+    &__eventsList{
+        width: 100vw;
+        height: auto;
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        justify-content: flex-start;
+    }
+}

@@ -1,0 +1,50 @@
+@import './variables.scss';
+
+.eCard {
+    box-sizing: border-box;
+    background:linear-gradient(70.83deg, #fdfbfb  10.17%,
+                 rgba(80, 80, 80, 0.466) 101.01%), #ebedee;
+    display:flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    width: 278px;
+    height: 102px;
+    margin: 16px;
+    // background: #323232;
+    box-shadow: 0px 4px 10px #000000;
+    border-radius: 15px;
+    &__attending {
+        box-sizing: border-box;
+        display: flex;
+        flex-flow: row;
+        padding-left: 16px;       
+    }
+    &__attending img{
+        height: 32px;
+        width: 32px;
+    }
+}
+
+.eCard h3 {
+    font-size: 16px;
+    font-weight: 500;
+    color: #323232;
+    padding-left: 16px;
+    margin: 0;
+    margin-top: 8px;
+}
+.eCard p {
+    font-weight: 300;
+    font-size: 14px;
+    padding-left: 16px;
+    margin:0;
+    color: rgb(86, 86, 86);
+}
+.eCard__attending p {
+    color: #323232;
+    font-size: 16px;
+    font-weight: 500;
+    padding-left: 0;
+    padding-top: 4px;
+    margin-left: 8px;
+}

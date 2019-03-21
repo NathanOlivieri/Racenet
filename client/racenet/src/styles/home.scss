@@ -1,0 +1,67 @@
+@import "./variables.scss";
+
+.home {
+   @include bg;
+    &__logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        width: 292px;
+        height: 292px;
+        left: 40px;
+        top: 86px;
+        background: url('../instagram_profile_image.png');
+        box-shadow: 16px 15px 15px rgba(0, 0, 0, 0.35);
+        border-radius: 25px;
+        &__img {
+            height: 220px;
+            width: 240px;
+        }
+    }
+    &__uname__input {
+        position: absolute;
+        width: 292px;
+        height: 51px;
+        left: 40px;
+        top: 397px;
+        background: linear-gradient(160.91deg, #FDFF9C -3.77%, rgba(255, 255, 255, 0) 63.24%), #F1EA65;
+        box-shadow: 16px 15px 15px rgba(0, 0, 0, 0.35);
+        border-radius: 10px;
+        border: none;
+        padding: 16px;
+        padding-left: 16px;
+        box-sizing: border-box;
+    }
+
+    &__pw__input {
+        position: absolute;
+        width: 292px;
+        height: 51px;
+        left: 40px;
+        top: 467px;
+        background: linear-gradient(160.91deg, #FDFF9C -3.77%, rgba(255, 255, 255, 0) 63.24%), #F1EA65;
+        box-shadow: 16px 15px 15px rgba(0, 0, 0, 0.35);
+        border-radius: 10px;
+        border: none;
+        padding: 16px;
+        padding-left: 16px;
+        box-sizing: border-box;
+    }
+
+    &__btn__input {
+        display: flex;
+        justify-content: center;
+        // align-items: baseline;
+        position: absolute;
+        width: 292px;
+        height: 51px;
+        left: 40px;
+        top: 537px;
+        background: #F1EA65;
+        box-shadow: 16px 15px 15px rgba(0, 0, 0, 0.35);
+        border-radius: 10px;
+        border: none;
+        box-sizing: border-box;
+    }
+}
