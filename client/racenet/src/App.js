@@ -6,8 +6,36 @@ import EventPage from './components/EventPage';
 import './styles/App.scss';
 import { BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 import NewEvent from './components/NewEvent.js';
+import axios from 'axios';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      userData: {},
+      userID: ''
+    }
+  }
+
+  componentDidMount() {
+    // getuserData();
+    let getuserConfig = {
+      method: 'GET',
+      url: 'http://localhost:8080/users/5c946117ea9c0137944de24b'
+    }
+    axios(getuserConfig)
+      .then((res) => {
+        this.setState({
+          userData:res.data,
+          userID:res.data._id,
+        })
+        console.log(this.state.userID)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
   render() {
     return (
       <Router>
@@ -15,8 +43,14 @@ class App extends Component {
         <Switch>
           <Route path="/" exact component={ Home } />
           <Route path="/Profile/:id" component={ Profile } />
-          <Route path="/events" exact component={ EventsPage } />
-          <Route path="/events/:id" component={ EventPage } />
+          <Route path="/events" exact render={(props) => {
+              return (
+                <EventsPage {...props} userID={this.state.userID} /> )
+              }} />
+          <Route path="/events/:id" exact render={(props) => {
+              return (
+                <EventPage {...props} userID={this.state.userID} /> )
+              }} />
           <Route path="/addnew" exact component={ NewEvent } />
         </Switch>
       </div>

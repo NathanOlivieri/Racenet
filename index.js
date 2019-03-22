@@ -1,3 +1,4 @@
+
 const mongoose = require('mongoose');
 const User = require('./src/Models/userSchema'),
       Event = require('./src/Models/eventSchema'),
@@ -58,6 +59,8 @@ app.post('/users', (req, res)=>{
 //----------------------------Eventsreqs-----------------------------------------
 //POST--newEvent
 app.post('/events', (req, res) => {
+  // let reqRaw = req.body
+  // let reqBody = JSON.stringify(reqRaw)
   Event.create(req.body).then((event) => {
     res.send(event)
   })
@@ -90,6 +93,17 @@ app.get('/events/:id', (req, res)=>{
   })
 });
 
+
+app.post('/events/:id/addnew', (req, res) => {
+
+  let eventID = req.params.id
+  let newUser = req.body.userID
+  Event.findByIdAndUpdate({ _id: eventID }, { $push: { attending: newUser } }, { new: true })
+    .then((result) => {
+      console.log(result)
+      res.send(result.attending)
+    })
+})
 
 
 

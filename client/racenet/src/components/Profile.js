@@ -75,6 +75,7 @@ export default class Profile extends Component {
     return (
       <div className="profile">
       <nav className="profile__nav">
+      <div className="profile__nav--overlay"></div>
       <Link to={"/events"} style={{ textDecoration: 'none' }}>
         <img className="profile__nav__icon" src={ navicon } 
         alt="navigate to all event lists"/>

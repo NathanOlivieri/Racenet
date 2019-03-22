@@ -16,7 +16,7 @@ export default class Home extends Component {
         <div className="home__pw">
           <input type="text" className="home__pw__input" placeholder="Password"/>
         </div>
-        <Link to={"/Profile/5c905fad8db55a1dd81539e0"} style={{ textDecoration: 'none' }}>
+        <Link to={"/Profile/5c946117ea9c0137944de24b"} style={{ textDecoration: 'none' }}>
         <div className="home__btn">
           <button className="home__btn__input" placeholder="Login">
             <p>Login</p>

@@ -29,8 +29,8 @@ export default class UserCard extends Component {
       // <ScrollAnimation initiallyVisible="true" offset="200" animateIn="slideInleft" animateOut="slideOutRight">
       <Link to={"/Profile/" + uid} title={uid} style={{ textDecoration: 'none' }}>
       <div className={this.setBGcolor()}>
-      <div className="usercard--overlay"></div>
-      <div className="usercard--shine"></div>
+       <div className="usercard--overlay"></div>
+       <div className="usercard--shine"></div>
         <img className="userCard__pp" src={ profilePic } 
             alt="user Profile Pic"/>
         <div className="userCard__div">

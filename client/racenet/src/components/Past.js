@@ -10,9 +10,7 @@ export default class Past extends Component {
           let userEvents = this.props.userEvents
                   pastObjs = userEvents.map((object) => {
                   return <EventCardSm name={object.name}
-                  type={object.eventType} 
-                  month={object.eventMonth} 
-                  day={object.eventDay} 
+                  eventDate={object.eventDate}
                   id={object._id} 
                   key={object.id} />
                 })   

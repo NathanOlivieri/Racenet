@@ -2,23 +2,59 @@ import React, { Component } from 'react'
 import '../styles/eventsPage.scss';
 import navicon from '../eventListIcon.svg';
 import DateFindr from './DatePicker';
+import axios from 'axios';
 
 
 export default class NewEvent extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      startDate: new Date(),
+      eventData: {}
+    };
+  }
+  handleChange(date) {
+    this.setState({
+      startDate: date
+    });
+  }
 
 submitHandler = (e) => {
+  
  const newEvent = {
    name: e.target.eventName.value,
-   eventYear: 1,
-   eventMonth: 1,
-   eventDay: 1,
+   eventDate: this.state.startDate,
    eventType: e.target.eventType.value,
-   eventCity: e.target.eventCity.value,
-   eventVenue: e.target.eventVenue.value,
-   eventContact: e.target.eventContact.value
+   eventContact: e.target.eventContact.value,
+   location: {
+     location: e.target.eventCity.value,
+     venue: e.target.eventVenue.value,
+   }
  }
-}
+ console.log(JSON.stringify(newEvent))
+ 
+//  let reqBody = JSON.stringify(newEvent)
 
+ const eConfig = {
+  method: 'POST',
+  url: 'http://localhost:8080/events',
+  data: JSON.stringify(newEvent),
+  headers: {
+    'content-type': 'application/json'
+  }
+}
+axios(eConfig)
+.then((rezult) => { 
+  console.log(rezult.data)
+  this.setState({
+    eventData: rezult.data
+  })
+})
+.catch((err) => {
+  console.log(err)
+})
+e.preventDefault();
+}
 
   render() {
     return (
@@ -44,7 +80,8 @@ submitHandler = (e) => {
                 </div>
                 <div className="dateCont">
                     <p>Event Date</p>
-                    <DateFindr />
+                    <DateFindr selected={this.state.startDate}
+                               onChange={this.handleChange}/>
                 </div>
                 <div className="formCont">
                     <label className="formlabel" for="eventType">Event Type</label>

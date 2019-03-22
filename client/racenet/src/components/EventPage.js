@@ -9,7 +9,7 @@ import UserCard from './UserCard';
 
 
 export default class EventPage extends Component {
-    constructor() {
+    constructor(props) {
         super();
         this.state = {
           eventData: {},
@@ -63,14 +63,37 @@ export default class EventPage extends Component {
                 resultsView: false
             })
       }
+      
 
+      addUsertoEvent = (e) => {
+        let userID = this.props.userID
+        let eventID = this.props.match.params.id
+        const postUserConfig = {
+          method: 'POST',
+          url: `http://localhost:8080/events/${eventID}/addnew`,
+          data: {userID},
+          headers: {
+            'content-type': 'application/json'
+          }
+        }
+        axios(postUserConfig)
+        .then((rezu) => { 
+          console.log(rezu.data)
+        })
+        .catch((err) => {
+          console.log(err)
+
+        })
+        
+      }
 
   render() {
+    
       let details;
       if(this.state.detailView){
           details =  <div className="eventPage__details">
           <h4 className="eventPage__details__label">DATE</h4>
-          <h3 className="eventPage__details__info">{`${this.state.eventData.eventMonth} ${this.state.eventData.eventDay}, 2019`}</h3>
+          <h3 className="eventPage__details__info">{this.state.eventData.eventDate}</h3>
 
           <h4 className="eventPage__details__label">EVENT TYPE</h4>
           <h3 className="eventPage__details__info">{this.state.eventData.eventType}</h3>
@@ -99,10 +122,13 @@ export default class EventPage extends Component {
           })        
       }
 
-      // let resultsMap;
-      // if(this.state.resultsView){
+      let resultsMap;
+      if(this.state.resultsView){
+         resultsMap = <div className="eventPage__results">
 
-      // }
+         
+         </div>   
+      }
 
 
     return (
@@ -138,6 +164,10 @@ export default class EventPage extends Component {
         { details }
         <div className="eventPage__attending">
             { attendsMap }
+        </div>
+        { resultsMap }
+        <div onClick={this.addUsertoEvent} className={this.state.resultsView ? "hideme" : "eventPage__join"}>
+          <p>JOIN EVENT</p>
         </div>
       </div>
     )

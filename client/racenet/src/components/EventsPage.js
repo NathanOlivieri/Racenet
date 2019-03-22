@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom';
 import '../styles/eventsPage.scss';
-import navicon from '../eventListIcon.svg';
 import addicon from '../add-icon.svg';
 import '../add-icon-gradient.svg';
 import EventCardLg from './EventCardLg';
 import axios from 'axios';
 import AOS from 'aos';
+import personIcon from '../person-icon.svg';
 
 
 
@@ -53,9 +53,10 @@ export default class EventsPage extends Component {
         <div className="eventsPage__header">
         <div className="eventsPage__header--overlay"></div>
             <h1>ALL EVENTS</h1>
-            <img src={ navicon } 
+            <Link to={"/Profile/5c946117ea9c0137944de24b"} style={{ textDecoration: 'none' }}>
+            <img src={ personIcon } 
                  className="eventsPage__header__img"
-                 alt="navigate to all event lists"/>
+                 alt="navigate to all event lists"/></Link>
             <div className="eventsPage__header__seperator"></div>
             <h3>RACEnet</h3>
         </div>

@@ -17,18 +17,9 @@ let eventSchema = new Schema({
           type:Date,
           default:Date.now
         },
-    eventYear: {
-        type: Number,
-        required: true
+    eventDate: {
+        type: Date,
     },
-    eventMonth: {
-        type: Number,
-        required: true
-    },
-    eventDay: {
-      type: Number,
-      required: true
-  },
     eventType: {
       type: String,
       default: 'Timed Event - Random'

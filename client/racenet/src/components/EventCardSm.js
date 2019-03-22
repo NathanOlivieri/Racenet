@@ -6,7 +6,7 @@ export default class EventCardSm extends Component {
     return (
       <div className="eCardSm">
         <h3>{this.props.name}</h3>
-        <p>{`${this.props.month}-${this.props.day}, 2019`}</p>
+        <p>{this.props.eventDate}</p>
         <h4>{this.props.abrev}</h4>
       </div>
     )
