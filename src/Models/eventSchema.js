@@ -33,6 +33,16 @@ let eventSchema = new Schema({
       ref: 'User'
     }],
     //NAIIIICE
+    results: [
+      {
+        user_id: ObjectId,
+        laptime:{
+          min: Number,
+          sec: Number,
+          mil: Number
+        } 
+      }
+    ],
     pictures: {
       type: Array,
       default: ['https://source.unsplash.com/100x100/?ferrari',
@@ -52,3 +62,9 @@ let eventSchema = new Schema({
 
 const Event = mongoose.model('Event', eventSchema);
 module.exports = Event;
+
+
+
+
+// POST /events/\;id/result 
+// {}

@@ -4,7 +4,7 @@ import profilePic from '../baseUserPic.jpg';
 import medalIIcon from '../medal.svg';
 import "animate.css/animate.min.css";
 import { Link } from 'react-router-dom';
-
+import addIcon from '../addLaptime.svg';
 
 export default class UserCard extends Component {
 
@@ -22,19 +22,23 @@ export default class UserCard extends Component {
     else if (br > go && br > si) { return bgBronz; }
   }
 
-
   render() {
+    let addLaptime = this.props.addLap
     let uid = this.props.id
     return (
       // <ScrollAnimation initiallyVisible="true" offset="200" animateIn="slideInleft" animateOut="slideOutRight">
-      <Link to={"/Profile/" + uid} title={uid} style={{ textDecoration: 'none' }}>
-      <div className={this.setBGcolor()}>
+      
+      <div className={this.setBGcolor()} id="x">
        <div className="usercard--overlay"></div>
        <div className="usercard--shine"></div>
+       
         <img className="userCard__pp" src={ profilePic } 
-            alt="user Profile Pic"/>
+            alt="user Profile Pic"/>   
         <div className="userCard__div">
-            <h5>{this.props.name}</h5>
+   
+        <img onClick={()=>{ addLaptime(uid) }} src={ addIcon } alt={`add laptime for user ${uid}`} className="userCard__div__addIcon"/>
+
+        <Link to={"/Profile/" + uid} title={uid} style={{ textDecoration: 'none' }}><h5>{this.props.name}</h5></Link>
             <div className="userCard__div__res">
                 <div className="userCard__div__res__gold">
                     <img src={ medalIIcon } alt="medal" className="medalIIcon"/>
@@ -51,7 +55,7 @@ export default class UserCard extends Component {
             </div>
         </div>
       </div>
-      </Link>
+   
     )
   }
 }

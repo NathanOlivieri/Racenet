@@ -6,6 +6,8 @@
     "animate.css": "^3.7.0",
     "aos": "^2.3.4",
     "axios": "^0.18.0",
+    "fast-sort": "^1.5.6",
+    "moment": "^2.24.0",
     "node-sass": "^4.11.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.4",

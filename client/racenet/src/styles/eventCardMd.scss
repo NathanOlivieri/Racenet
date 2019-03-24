@@ -2,8 +2,8 @@
 
 .eCard {
     box-sizing: border-box;
-    background:linear-gradient(70.83deg, #fdfbfb  10.17%,
-                 rgba(80, 80, 80, 0.466) 101.01%), #ebedee;
+    background:linear-gradient(140.83deg, rgb(104, 207, 255) 10.17%,
+    rgba(255, 255, 255, 0) 101.01%), #b1b1fc;
     display:flex;
     flex-flow: column;
     justify-content: flex-start;
@@ -23,7 +23,33 @@
         height: 32px;
         width: 32px;
     }
+    &--overlay{
+        height: 96px;
+        width: 280px;
+        padding-top: 8px;
+        position: absolute;
+        left: 28px;
+        box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.65);
+        -webkit-transform: skew(-15deg) rotate(-3deg);
+        transform: skew(15deg) rotate(3deg);
+    }
 }
+//LINK wrapping the whole card prevents this just like nth child
+
+// .eCard:hover {
+//     box-sizing: border-box;
+//     background:linear-gradient(140.83deg, rgb(74, 164, 206) 10.17%,
+//     rgba(255, 255, 255, 0) 101.01%), #9292ff;
+//     display:flex;
+//     flex-flow: column;
+//     justify-content: flex-start;
+//     width: 288px;
+//     height: 112px;
+//     margin: 16px;
+//     // background: #323232;
+//     box-shadow: 0px 4px 10px #000000;
+//     border-radius: 15px;
+// }
 
 .eCard h3 {
     font-size: 16px;

@@ -2,6 +2,8 @@
 
 .home {
    @include bg;
+//    background: linear-gradient(140.83deg, rgb(104, 207, 255) 10.17%,
+//    rgba(255, 255, 255, 0) 101.01%), #b1b1fc;
     &__logo {
         display: flex;
         justify-content: center;
@@ -13,7 +15,14 @@
         top: 86px;
         background: url('../instagram_profile_image.png');
         box-shadow: 16px 15px 15px rgba(0, 0, 0, 0.35);
-        border-radius: 25px;
+        border-radius: 15px;
+        &--overlay {
+            height: 286px;
+            width: 286px;
+            position: absolute;
+            box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.65);  
+            transform: skew(-15deg) rotate(-3deg);
+        }
         &__img {
             height: 220px;
             width: 240px;
@@ -27,7 +36,7 @@
         top: 397px;
         background: linear-gradient(160.91deg, #FDFF9C -3.77%, rgba(255, 255, 255, 0) 63.24%), #F1EA65;
         box-shadow: 16px 15px 15px rgba(0, 0, 0, 0.35);
-        border-radius: 10px;
+        border-radius: 7px;
         border: none;
         padding: 16px;
         padding-left: 16px;
@@ -42,7 +51,7 @@
         top: 467px;
         background: linear-gradient(160.91deg, #FDFF9C -3.77%, rgba(255, 255, 255, 0) 63.24%), #F1EA65;
         box-shadow: 16px 15px 15px rgba(0, 0, 0, 0.35);
-        border-radius: 10px;
+        border-radius: 7px;
         border: none;
         padding: 16px;
         padding-left: 16px;
@@ -58,10 +67,28 @@
         height: 51px;
         left: 40px;
         top: 537px;
-        background: #F1EA65;
+        background: linear-gradient(140.83deg, rgb(107, 208, 255) 10.17%,
+        rgba(255, 255, 255, 0) 101.01%), #7878ff;
         box-shadow: 16px 15px 15px rgba(0, 0, 0, 0.35);
-        border-radius: 10px;
+        border-radius: 7px;
         border: none;
         box-sizing: border-box;
+        &--overlay {
+            height:51px;
+            width: 286px;
+            position: absolute;
+            box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.65);  
+            transform: skew(-15deg) rotate(-3deg);
+            bottom: 2px;
+        }
+    }
+    &__btn__input p {
+        color: #FAFAFA;
+        font-weight: 700;
+        font-size: 20px;
+        margin: 0;
+        letter-spacing: 1.5px;
     }
 }
+
+//saved bg yellow#F1EA65;

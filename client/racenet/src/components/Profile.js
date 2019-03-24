@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/profiles.scss';
-import navicon from '../eventListIcon.svg';
+import navicon from '../viewList-icon.svg';
 import profilePic from '../baseUserPic.jpg';
 import logo from '../logo_transparent.png'
 import Upcomming from '../components/Upcomming.js';
@@ -9,6 +9,7 @@ import Past from '../components/Past.js';
 import Gallery from '../components/Gallery.js';
 import Records from '../components/Records';
 import axios from 'axios';
+import moment from 'moment';
 export default class Profile extends Component {
   constructor() {
     super();
@@ -16,9 +17,11 @@ export default class Profile extends Component {
       userData: {},
       userPics: [],
       userEvents: [],
+      pastArray: [],
+      futureArray: [],
       userGolds: 1,
       userSilvers: 1,
-      userBronzes: 1,
+      userBronzes: 2,
     }
   }
 
@@ -36,7 +39,7 @@ export default class Profile extends Component {
     else if (br > go && br > si) { return bgBronz; }
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     // getuserData();
     let uid = this.props.match.params.id
     let getuserConfig = {
@@ -58,16 +61,34 @@ export default class Profile extends Component {
       .catch((err) => {
         console.log(err)
       })
+//DOES NOT WORK YET
+      //maybe put in render instead//
+      let allArray = this.state.userEvents
+      await allArray.forEach((time) => {
+        let eventDate = moment(time.eventDate).format('MMMM Do YYYY')
+        let today = moment().format("MMMM Do YYYY")
+        let pasArray = []
+        let futureArray = []
+        if( eventDate >= today ) {
+          futureArray.push(time)
+        }else{
+          pasArray.push(time)
+        }
+      console.log(pasArray)
+      console.log(futureArray)
+      })
   }
   render() {
 
+  // console.log(allArray)
+    // console.log(today._d)
+   
     let upcomingObjs
     let upcomingArray = this.state.userEvents
             upcomingObjs = upcomingArray.map((object) => {
             return <Upcomming name={object.name}
             type={object.eventType} 
-            month={object.eventMonth} 
-            day={object.eventDay}
+            eventDate={object.eventDate}
             attend={object.attending.length}  
             id={object._id} 
             key={object.id} />

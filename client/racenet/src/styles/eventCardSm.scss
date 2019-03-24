@@ -9,6 +9,15 @@
     margin: 19px;
     display: flex;
     flex-flow: column;
+    &--overlay {
+        height: 96px;
+        width: 110px;
+        padding-top: 8px;
+        position: absolute;
+        box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.65);
+        -webkit-transform: skew(-15deg) rotate(-3deg);
+        transform: skew(15deg) rotate(3deg);
+    }
 }
 
 .eCardSm h3 {

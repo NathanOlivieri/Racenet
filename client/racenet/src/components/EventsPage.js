@@ -41,8 +41,7 @@ export default class EventsPage extends Component {
       let eventsMap = eventsArray.map((object) => {
         return <EventCardLg title={object.name}
                             type={object.eventType}
-                            month={object.eventMonth}
-                            day={object.eventDay}
+                            date={object.eventDate}
                             location={object.location.venue}
                             attend={object.attending.length}
                             id={object._id}

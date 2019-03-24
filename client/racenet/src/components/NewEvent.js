@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import '../styles/eventsPage.scss';
 import navicon from '../eventListIcon.svg';
-import DateFindr from './DatePicker';
+import DatePicker from "react-datepicker";
 import axios from 'axios';
+import 'react-datepicker/dist/react-datepicker-cssmodules.css';
+import {Link} from 'react-router-dom';
 
 
 export default class NewEvent extends Component {
@@ -13,25 +15,24 @@ export default class NewEvent extends Component {
       eventData: {}
     };
   }
-  handleChange(date) {
+  handleChange = (date) => {
     this.setState({
       startDate: date
     });
   }
 
-submitHandler = (e) => {
-  
- const newEvent = {
-   name: e.target.eventName.value,
-   eventDate: this.state.startDate,
-   eventType: e.target.eventType.value,
-   eventContact: e.target.eventContact.value,
-   location: {
+  submitHandler = (e) => { 
+    const newEvent = {
+    name: e.target.eventName.value,
+    eventDate: this.state.startDate,
+    eventType: e.target.eventType.value,
+    eventContact: e.target.eventContact.value,
+    location: {
      location: e.target.eventCity.value,
      venue: e.target.eventVenue.value,
    }
  }
- console.log(JSON.stringify(newEvent))
+//  console.log(JSON.stringify(newEvent))
  
 //  let reqBody = JSON.stringify(newEvent)
 
@@ -80,8 +81,8 @@ e.preventDefault();
                 </div>
                 <div className="dateCont">
                     <p>Event Date</p>
-                    <DateFindr selected={this.state.startDate}
-                               onChange={this.handleChange}/>
+                    <DatePicker selected={this.state.startDate}
+                                onChange={this.handleChange}/>
                 </div>
                 <div className="formCont">
                     <label className="formlabel" for="eventType">Event Type</label>
@@ -102,6 +103,11 @@ e.preventDefault();
                 <div className="formCont">
                      <button className="formbutton" type="text" name="formsub"><h2>SUBMIT</h2></button>
                 </div>
+                <Link to={"/events"} style={{ textDecoration: 'none' }}>
+                  <div className="formCont">
+                      <button className="formbutton2" type="text" name="formCancel"><h2>CANCEL</h2></button>
+                  </div>
+                </Link>
             </form>
         </div>
       </div>

@@ -1,4 +1,4 @@
-
+require('dotenv').config();
 const mongoose = require('mongoose');
 const User = require('./src/Models/userSchema'),
       Event = require('./src/Models/eventSchema'),
@@ -95,7 +95,6 @@ app.get('/events/:id', (req, res)=>{
 
 
 app.post('/events/:id/addnew', (req, res) => {
-
   let eventID = req.params.id
   let newUser = req.body.userID
   Event.findByIdAndUpdate({ _id: eventID }, { $push: { attending: newUser } }, { new: true })
@@ -103,9 +102,36 @@ app.post('/events/:id/addnew', (req, res) => {
       console.log(result)
       res.send(result.attending)
     })
+  User.findByIdAndUpdate({_id: newUser}, {$push: {events: eventID}}, {new: true})
+  .then((rezz) => {
+    console.log(rezz)
+  })
 })
 
+app.post('/events/:id/results', (req, res) => {
 
+  let eventID = req.params.id
+  let newLaptime = req.body
+  console.log(newLaptime);
+  Event.findByIdAndUpdate({ _id: eventID }, { $push: { results: newLaptime } }, { new: true })
+    .then((result) => {
+      console.log(result.results)
+      res.send(result)
+    })
+})
+
+app.get('/events/:id/results', (req, res) => {
+  let eventID = req.params.id
+  Event.findById(eventID)
+    .populate("attending")
+  .then(evn => {
+      res.send(evn.results);
+      console.log(evn.results)
+  })
+  .catch(err => {
+      console.log(err)
+  })
+})
 
 //onlyeabove^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 app.listen(PORT, () => {

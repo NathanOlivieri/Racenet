@@ -11,12 +11,13 @@ export default class EventCardMd extends Component {
       <Link to={"/events/" + eid} title={eid} style={{ textDecoration: 'none' }}>
 
       <div className="eCard">
+      <div className="eCard--overlay"></div>
         <h3>{this.props.name}</h3>
-        <p>{`${this.props.month} ${this.props.day}, 2019`}</p>
+        <p>{this.props.eventDate}</p>
         <p>{this.props.type}</p>
         <div className="eCard__attending">
           <img src={ userIcon } alt="User-Icon"/>
-          <p>32</p>
+          <p>{this.props.attending}</p>
         </div>
       </div>
       </Link>

@@ -3,8 +3,13 @@ import { Link } from 'react-router-dom';
 import '../styles/eventPage.scss';
 import navicon from '../iconArrowright.svg';
 import personIcon from '../person-icon.svg';
+import medal from '../medal.svg';
 import axios from 'axios';
 import UserCard from './UserCard';
+import UserResultCard from './UserResultCard'
+import LaptimeAdder from './LaptimeAdder'
+import sort from 'fast-sort'
+
 
 
 
@@ -14,9 +19,11 @@ export default class EventPage extends Component {
         this.state = {
           eventData: {},
           attendUsers: [],
+          resultsData: [],
           detailView: true,
           attendView: false,
-          resultsView: false
+          resultsView: false,
+          showAddnew: false,
         }
       }
 
@@ -50,11 +57,24 @@ export default class EventPage extends Component {
             })
       }
       toggleResults = (e) => {
-        this.setState({
-            detailView:false,
-            attendView:false,
-            resultsView: true
-        })
+        let id = this.props.match.params.id
+        let getresults = {
+          method: 'GET',
+          url: `http://localhost:8080/events/${id}/results`
+        }
+        axios(getresults)
+          .then((responce) => {
+            this.setState({
+              resultsData: responce.data,
+              detailView:false,
+              attendView:false,
+              resultsView: true
+            })
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+          console.log(this.state.resultsData)
       }
       toggleAttend = (e) => {
             this.setState({
@@ -64,6 +84,11 @@ export default class EventPage extends Component {
             })
       }
       
+      toggleAddLap = (param) => {
+        console.log(param)
+        console.log(`TRYR`)
+        this.setState({showAddnew: true, laptimeUser:param})
+      }
 
       addUsertoEvent = (e) => {
         let userID = this.props.userID
@@ -82,10 +107,50 @@ export default class EventPage extends Component {
         })
         .catch((err) => {
           console.log(err)
+        })
+      }
+
+      lapFunc = (e) => {
+        e.preventDefault();
+        let eventID = this.props.match.params.id
+        let lapMin = e.target.min.value
+        let lapSec = e.target.sec.value
+        let lapMil = e.target.mil.value
+
+        let laptimeUser = this.state.laptimeUser
+        
+        const postLaptimeConfig = {
+          method: 'POST',
+          url: `http://localhost:8080/events/${eventID}/results`,
+          data: {
+            user_id: laptimeUser,
+            laptime: {
+              min: lapMin,
+              sec: lapSec,
+              mil: lapMil
+            }
+          },
+          headers: {
+            'content-type': 'application/json'
+          }
+        }
+        axios(postLaptimeConfig)
+        .then((rezu) => { 
+          console.log(rezu.data)
+        })
+        .catch((err) => {
+          console.log(err)
 
         })
-        
+      
+
+        this.setState({
+          showAddnew: false,
+        })
+        console.log(`${lapMin} ${laptimeUser}`)
+        //make post axios request to event to findby id nd update.
       }
+
 
   render() {
     
@@ -118,21 +183,41 @@ export default class EventPage extends Component {
             silvers={object.silvers} 
             bronzes={object.bronzes} 
             id={object._id} 
-            key={object.id} />
+            key={object.id} 
+            addLap={this.toggleAddLap}/>
           })        
       }
-
+//npm i array-sort to sort this array three times.
       let resultsMap;
-      if(this.state.resultsView){
-         resultsMap = <div className="eventPage__results">
+      console.log(this.state.resultsData)
 
-         
-         </div>   
+      if(this.state.resultsView){
+        let resultsArray = this.state.resultsData
+
+       sort(resultsArray).asc([r => r.laptime.min,
+                              r => r.laptime.sec,
+                              r => r.laptime.mil ] )
+        console.log(resultsArray)
+        // let sortedSec = sort(sortedMin).asc(r => r.laptime.sec)
+        // let sortedMil = sort(sortedSec).asc(r => r.laptime.mil)
+
+         resultsMap = resultsArray.map((o) => {
+          return <UserResultCard min={o.laptime.min}
+                                 id={o.user_id}
+                                 sec={o.laptime.sec}
+                                 mil={o.laptime.mil}/>
+         })
+      }
+
+      let addLap;
+      if(this.state.showAddnew){
+        addLap = <LaptimeAdder submitLap={this.lapFunc} />
       }
 
 
     return (
       <div className="eventPage">
+      { addLap }
         <div className="eventPage__header">         
             <div className="topnav">
                 <h3>RACEnet Event</h3>
@@ -165,7 +250,27 @@ export default class EventPage extends Component {
         <div className="eventPage__attending">
             { attendsMap }
         </div>
-        { resultsMap }
+        <div className={this.state.resultsView ? "eventPage__results" : "hideme" }>
+            <div className="medalsflex">
+              <div className="eventPage__results--first">
+                <img src={ medal } alt="" className="eventPage__results--first__icon"/>
+                <p>1ST</p>
+              </div>
+              <div className="eventPage__results--second">
+                <img src={ medal } alt="" className="eventPage__results--first__icon"/>
+                <p>2nd</p>
+              </div>
+              <div className="eventPage__results--third">
+                <img src={ medal } alt="" className="eventPage__results--first__icon"/>
+                <p>3rd</p>
+              </div>
+              <div className="eventPage__results--last">
+                <img src={ medal } alt="" className="eventPage__results--first__icon"/>
+                <p>PAR</p>
+              </div>
+            </div>
+            { resultsMap }
+        </div>
         <div onClick={this.addUsertoEvent} className={this.state.resultsView ? "hideme" : "eventPage__join"}>
           <p>JOIN EVENT</p>
         </div>

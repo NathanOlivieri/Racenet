@@ -95,12 +95,12 @@
         &--overlay{
             z-index: 9999;
             width: 95vw;
-            height: 294px;
+            height: 219px;
             position: fixed;
             right: 15px;
-            bottom: 382px;
-            box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.65);   
-            transform: skewX(-15deg) rotate(-5deg); 
+            bottom: 380px;
+            box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.35);
+            transform: skewX(-15deg) rotate(-5deg);
         }
         &__icon {
             z-index: 10000;
@@ -112,9 +112,10 @@
         }
         &__logo {
             position: absolute;
-            width: 86px;
-            height: 86px;
-            top: 16px;
+            width: 150px;
+            height: 150px;
+            top: -10px;
+            left:-20px;
         }
     }
     &__upcoming{
