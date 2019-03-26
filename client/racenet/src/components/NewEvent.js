@@ -5,6 +5,7 @@ import DatePicker from "react-datepicker";
 import axios from 'axios';
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 import {Link} from 'react-router-dom';
+import AddEventConfirm from './AddEventConfirm';
 
 
 export default class NewEvent extends Component {
@@ -12,7 +13,8 @@ export default class NewEvent extends Component {
     super(props);
     this.state = {
       startDate: new Date(),
-      eventData: {}
+      eventData: {},
+      showModal: false
     };
   }
   handleChange = (date) => {
@@ -32,6 +34,8 @@ export default class NewEvent extends Component {
      venue: e.target.eventVenue.value,
    }
  }
+ window.scroll(0,0);
+ this.setState({showModal:true})
 //  console.log(JSON.stringify(newEvent))
  
 //  let reqBody = JSON.stringify(newEvent)
@@ -58,8 +62,13 @@ e.preventDefault();
 }
 
   render() {
+    let modalConfirm;
+    if(this.state.showModal){
+      modalConfirm = <AddEventConfirm />
+    }
     return (
       <div className="addEvent">
+      { modalConfirm }
             <div className="eventsPage__header">
               <div className="eventsPage__header--overlay"></div>
             <h1>Add New Event</h1>
@@ -77,28 +86,33 @@ e.preventDefault();
                 <div className="formCont">
                   <div className="formCont--overlay"></div>
                     <label className="formlabel" for="eventName">Event Name</label>
-                    <input placeholder="Enter Event Name" className="forminput" type="text" name="eventName"/>
+                    <input required placeholder="Enter Event Name" className="forminput" type="text" name="eventName"/>
                 </div>
                 <div className="dateCont">
+                <div className="dateCont--overlay"></div>
                     <p>Event Date</p>
                     <DatePicker selected={this.state.startDate}
                                 onChange={this.handleChange}/>
                 </div>
                 <div className="formCont">
+                <div className="formCont--overlay2"></div>
                     <label className="formlabel" for="eventType">Event Type</label>
-                    <input placeholder="Enter Event Type" className="forminput" type="text" name="eventType"/>
+                    <input required placeholder="Enter Event Type" className="forminput" type="text" name="eventType"/>
                 </div>
                 <div className="formCont">
+                <div className="formCont--overlay3"></div>
                     <label className="formlabel" for="eventCity">City</label>
-                    <input placeholder="Enter City" className="forminput" type="text" name="eventCity"/>
+                    <input required placeholder="Enter City" className="forminput" type="text" name="eventCity"/>
                 </div>
                 <div className="formCont">
+                <div className="formCont--overlay4"></div>
                     <label className="formlabel" for="eventVenue">Venue</label>
-                    <input placeholder="Enter Event Venue" className="forminput" type="text" name="eventVenue"/>
+                    <input required placeholder="Enter Event Venue" className="forminput" type="text" name="eventVenue"/>
                 </div>
                 <div className="formCont">
+                <div className="formCont--overlay5"></div>
                     <label className="formlabel" for="eventContact">Contact</label>
-                    <input placeholder="Enter Email or Phone" className="forminput" type="text" name="eventContact"/>
+                    <input required placeholder="Enter Email or Phone" className="forminput" type="text" name="eventContact"/>
                 </div>
                 <div className="formCont">
                      <button className="formbutton" type="text" name="formsub"><h2>SUBMIT</h2></button>

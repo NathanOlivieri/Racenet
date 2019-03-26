@@ -1,5 +1,18 @@
 @import './variables.scss';
 
+.eCardGallery {
+    height: 110px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    box-sizing: border-box;
+    margin-top:26px;
+    overflow-x: auto;
+}
+.eCardGallery::-webkit-scrollbar {
+    display: none;
+  }
+
 .eCard {
     box-sizing: border-box;
     background:linear-gradient(140.83deg, rgb(104, 207, 255) 10.17%,
@@ -8,11 +21,14 @@
     flex-flow: column;
     justify-content: flex-start;
     width: 278px;
-    height: 102px;
+    height: 250px;
     margin: 16px;
     // background: #323232;
     box-shadow: 0px 4px 10px #000000;
     border-radius: 15px;
+    &__flex{
+        display: flex;
+    }
     &__attending {
         box-sizing: border-box;
         display: flex;
@@ -24,14 +40,22 @@
         width: 32px;
     }
     &--overlay{
-        height: 96px;
+        height: 235px;
         width: 280px;
         padding-top: 8px;
         position: absolute;
-        left: 28px;
+        left: 43px;
         box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.65);
         -webkit-transform: skew(-15deg) rotate(-3deg);
         transform: skew(15deg) rotate(3deg);
+    }
+    &__picture {
+        height: 77px;
+        min-width: 77px;
+        z-index: 4;
+        border-radius: 50%;
+        box-shadow: 0px 4px 4px rgba(38, 5, 51, 0.45);
+        margin-left:16px;
     }
 }
 //LINK wrapping the whole card prevents this just like nth child

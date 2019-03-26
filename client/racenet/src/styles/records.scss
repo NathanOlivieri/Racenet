@@ -2,15 +2,15 @@
 
 .results{
     position: relative;
-    bottom: 5px;
+    bottom: -72px;
     left:275px;
     padding: 16px;
     box-sizing: border-box;
-    height: 220px;
+    height: 170px;
     display: flex;
     align-items: flex-start;
     flex-flow: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     width: 100%;
     // padding-left: 250px;
 }
@@ -22,6 +22,7 @@
     height: 36px;
     border-radius: 6px;
     border: solid 1px #7c7c7c;
+    margin-bottom: 4px;
     }
     &__silver {
         @include bg-silver;
@@ -29,6 +30,7 @@
         height: 34px;
         border-radius: 6px;
         border: solid 1px #7c7c7c;
+        margin-bottom: 4px;
         }
         &__bronze {
             @include bg-bronze;
@@ -36,14 +38,8 @@
             height: 34px;
             border-radius: 6px;
             border: solid 1px #7c7c7c;
+            margin-bottom: 4px;
             }
-            &__total {
-                width: 65px;
-                height: 34px;
-                border-radius: 6px;
-                border: solid 1px #7c7c7c;
-                background:linear-gradient(140.83deg, #97d9e1  10.17%,
-                rgba(255, 255, 255, 0) 101.01%), #d9afd9;            }
 }
 
 .results p {

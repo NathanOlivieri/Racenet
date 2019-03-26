@@ -20,7 +20,10 @@
         height: 189px;
         left: 0px;
         top: -28px;
-        animation: myMove 10s ease infinite;
+        // animation: myMove 5s ease infinite;
+        // transition: 5000ms;
+        background:linear-gradient(140.83deg, #8686f0 10.17%,
+        rgba(255, 255, 255, 0) 101.01%), rgb(92, 203, 255);        
         mix-blend-mode: normal;
         border: none;
         box-sizing: border-box;
@@ -91,6 +94,9 @@
         align-items: center;
         justify-content: space-around;
     }
+    &__flex {
+        display: flex;
+    }
 }
 
 .addIcon {
@@ -130,7 +136,7 @@
 .dateCont p{
     font-size: 32px;
     font-weight: 300;
-    color: #fafafa;
+    color: #FFB74B;
     padding-bottom: 36px;
     padding-top: 36px;
     margin: 0;
@@ -140,34 +146,26 @@
     width: 100%;
     display: flex;
     flex-flow: column;
-    align-items: center;
-    
+    align-items: center;     
 }
 .formCont label{
     font-size: 32px;
     font-weight: 300;
-    color: #fafafa;
+    color: #FFB74B;
     padding-bottom: 36px;
     padding-top: 36px;
 }
 .formCont input{
-    background:linear-gradient(140.83deg, rgb(104, 207, 255) 10.17%,
-                 rgba(255, 255, 255, 0) 101.01%), #b1b1fc;
+    background:linear-gradient(140.83deg, rgb(181, 228, 250) 10.17%,
+                 rgba(255, 255, 255, 0) 101.01%), #c0c0ff;
     opacity: 0.9;
     height: 60px;
     width: 275px;
     border: none;
-    border-radius: 15px;
+    border-radius: 2px;
     box-sizing: border-box;
     padding-left: 32px;
     box-shadow: 0px 3px 40px rgba(0, 0, 0, 0.65);
-    // &--overlay {
-    //     height: 50px;
-    //     width: 240px;  
-    //     background: #fafafa;
-    //     position: absolute;
-    //     top: 420px 
-    // }
 }
 
 .react-datepicker__input-container input{
@@ -186,13 +184,12 @@
 .formbutton {
     height: 60px;
     width: 275px;
-    background:linear-gradient(140.83deg, rgb(104, 207, 255) 10.17%,
-                 rgba(255, 255, 255, 0) 101.01%), #b1b1fc;
+    background: linear-gradient(136.62deg, #FDF0AA -7.98%, rgba(255, 255, 255, 0) 72.96%), #FFB74B;
     border: none;
     border-radius: 15px;
     box-shadow: 0px 3px 40px rgba(0, 0, 0, 0.65);
     box-sizing: border-box;
-    margin: 32px 0 16px 0;
+    margin: 48px 0 16px 0;
 }
 .formbutton2 {
     background:none;
@@ -204,8 +201,38 @@
     margin-bottom: 32px;
 }
 .formbutton2 h2 {
-    color: #8686f0;
+    color: #FFB74B;
     font-size: 20px;
     margin-top: unset;
     font-weight:600;
+}
+
+.newEventModal {
+    background: linear-gradient(180deg, #222222 0%, rgba(255, 255, 255, 0.1) 100%), #4b4b4bfa;
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    p {
+        font-size: 24px;
+        color: #FFB74B;
+        font-weight: 700;
+        padding: 55px;
+        margin:0;
+    }
+    button {
+        font-weight: 600;
+        color: #323232;
+        margin-bottom: 16px;
+        height: 65px;
+        width: 275px;
+        border: none;
+        border-radius: 35px;
+        background: linear-gradient(70.25deg, rgb(74, 255, 225) 0.98%, 
+        rgba(255, 255, 255, 0) 100%), rgb(107, 247, 118);
+    }
 }

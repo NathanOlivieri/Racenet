@@ -16,8 +16,6 @@ export default class EventCardLg extends Component {
       day:strArr[1],
       year:strArr[2]
     }
-
-    console.log(strArr)
     return (        
     <Link to={"/events/" + eid} title={eid} style={{ textDecoration: 'none' }}>
       <div className="eCardLg" data-aos="fade-left">

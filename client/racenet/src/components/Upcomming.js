@@ -6,7 +6,6 @@ import moment from 'moment';
 
 export default class Upcomming extends Component {
 
-  
 
   render() {
     let edate = this.props.eventDate
@@ -14,12 +13,13 @@ export default class Upcomming extends Component {
     return (
       <div className="up">
         <h2>UPCOMING RACES</h2>
-        <img src={ arrowIcon } alt="navigate to upcomming events for current user" className="up__icon"/>
+        {/* <img src={ arrowIcon } alt="navigate to upcomming events for current user" className="up__icon"/> */}
         <div className="up__eventsList">
         <EventcardMd name={this.props.name}
             type={this.props.type} 
             eventDate={ mmddyyyy }
             attending={this.props.attend} 
+            ePics={this.props.ePics}
             id={this.props.id} 
             key={this.props.key} />        
         </div>

@@ -8,8 +8,6 @@ import axios from 'axios';
 import AOS from 'aos';
 import personIcon from '../person-icon.svg';
 
-
-
 export default class EventsPage extends Component {
     constructor() {
         super();
@@ -38,6 +36,7 @@ export default class EventsPage extends Component {
 
   render() {
       let eventsArray = this.state.eventsData
+      let eventsNum = eventsArray.length
       let eventsMap = eventsArray.map((object) => {
         return <EventCardLg title={object.name}
                             type={object.eventType}
@@ -51,7 +50,10 @@ export default class EventsPage extends Component {
       <div className="eventsPage">
         <div className="eventsPage__header">
         <div className="eventsPage__header--overlay"></div>
+        <div className="eventsPage__flex">
             <h1>ALL EVENTS</h1>
+            <h1>{`(${ eventsNum })`}</h1>
+        </div>
             <Link to={"/Profile/5c946117ea9c0137944de24b"} style={{ textDecoration: 'none' }}>
             <img src={ personIcon } 
                  className="eventsPage__header__img"

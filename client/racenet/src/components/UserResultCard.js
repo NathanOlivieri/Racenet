@@ -45,7 +45,7 @@ export default class UserCard extends Component {
       //color should be according to placement//
       <div className="bgGoldres" id="x">
        <div className="usercard--overlay"></div>
-       <div className="usercard--shine"></div>
+       {/* <div className="usercard--shine"></div> */}
        
         <img className="bgGoldres__pp" src={ profilePic } 
             alt="user Profile Pic"/>   

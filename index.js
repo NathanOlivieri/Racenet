@@ -133,6 +133,23 @@ app.get('/events/:id/results', (req, res) => {
   })
 })
 
+app.post('/podium', (req, res) => {
+  let firstPlace = req.body.first.user_id
+  let secondPlace = req.body.second.user_id
+  let thirdPlace = req.body.third.user_id
+  Promise.all([
+    User.findByIdAndUpdate({ _id: firstPlace }, { $inc: { "golds": 1 }}).exec(),
+    User.findByIdAndUpdate({ _id: secondPlace }, { $inc: { "silvers": 1 }}).exec(),
+    User.findByIdAndUpdate({ _id: thirdPlace }, { $inc: { "bronzes": 1 }}).exec()
+  ])
+  .then(arrResults => {
+    console.log(arrResults)
+  })
+  .catch(err => {
+    console.log(err)
+  })
+})
+
 //onlyeabove^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 app.listen(PORT, () => {
   console.log(`server listening on PORT ${PORT}`)

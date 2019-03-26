@@ -19,12 +19,12 @@ export default class Records extends Component {
         <img src={ medalicon } alt="iconmedal" className="medalicon"/>        
             <p>{`${this.props.userData.bronzes}`}</p>
         </div>
-        <div className="container__total">
+        {/* <div className="container__total">
         <img src={ medalicon } alt="iconmedal" className="medalicon"/>        
             <p>{Math.floor(this.props.userData.golds + 
                            this.props.userData.silvers + 
                            this.props.userData.bronzes)}</p>
-        </div>
+        </div> */}
       </div>
     )
   }

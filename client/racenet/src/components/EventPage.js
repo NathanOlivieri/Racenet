@@ -6,12 +6,12 @@ import personIcon from '../person-icon.svg';
 import medal from '../medal.svg';
 import axios from 'axios';
 import UserCard from './UserCard';
-import UserResultCard from './UserResultCard'
-import LaptimeAdder from './LaptimeAdder'
-import sort from 'fast-sort'
-
-
-
+import UserResultCard from './UserResultCard';
+import LaptimeAdder from './LaptimeAdder';
+import AddtoEventConfirm from './AddtoEventConfirm'
+import sort from 'fast-sort';
+import Gallery from '../components/Gallery.js';
+import moment from 'moment';
 
 export default class EventPage extends Component {
     constructor(props) {
@@ -20,14 +20,17 @@ export default class EventPage extends Component {
           eventData: {},
           attendUsers: [],
           resultsData: [],
+          eventPics: [],
           detailView: true,
           attendView: false,
           resultsView: false,
           showAddnew: false,
+          addEventConfirm: false
         }
       }
 
     componentDidMount() {
+      window.scroll(0,0);
         let eid = this.props.match.params.id
         let geteventConfig = {
           method: 'GET',
@@ -40,7 +43,8 @@ export default class EventPage extends Component {
               eventAttend: res.data.attending.length,
               eventLoc: res.data.location.location,
               eventVen: res.data.location.venue,
-              attendUsers: res.data.attending
+              attendUsers: res.data.attending,
+              eventPics: res.data.pictures
             })
           })
           .catch((err) => {
@@ -49,6 +53,7 @@ export default class EventPage extends Component {
       }
 
       toggleDetails = (e) => {
+        window.scroll(0,0);
             this.setState({
                 detailView:true,
                 attendView:false,
@@ -57,6 +62,7 @@ export default class EventPage extends Component {
             })
       }
       toggleResults = (e) => {
+        window.scroll(0,0);
         let id = this.props.match.params.id
         let getresults = {
           method: 'GET',
@@ -77,6 +83,7 @@ export default class EventPage extends Component {
           console.log(this.state.resultsData)
       }
       toggleAttend = (e) => {
+        window.scroll(0,0);
             this.setState({
                 detailView:false,
                 attendView:true,
@@ -104,6 +111,7 @@ export default class EventPage extends Component {
         axios(postUserConfig)
         .then((rezu) => { 
           console.log(rezu.data)
+          this.setState({addEventConfirm:true})
         })
         .catch((err) => {
           console.log(err)
@@ -140,10 +148,7 @@ export default class EventPage extends Component {
         })
         .catch((err) => {
           console.log(err)
-
         })
-      
-
         this.setState({
           showAddnew: false,
         })
@@ -151,14 +156,43 @@ export default class EventPage extends Component {
         //make post axios request to event to findby id nd update.
       }
 
+      submitLaptimes = () => {
+        let winArray = this.state.resultsData
+        sort(winArray).asc([r => r.laptime.min,
+          r => r.laptime.sec,
+          r => r.laptime.mil ])
+          const [winner, second, third, ...rest] = winArray
+          const postPodium = {
+            method: 'POST',
+            url: `http://localhost:8080/podium`,
+            data: {
+              first: winner,
+              second: second,
+              third: third
+            },
+            headers: {
+              'content-type': 'application/json'
+            }
+          }
+          axios(postPodium)
+          .then((rezz) => { 
+            console.log(rezz.data)
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      }
+
 
   render() {
-    
+    let edate = this.state.eventData.eventDate
+    let mmddyyyy = moment(edate).format('MMMM Do YYYY');
       let details;
       if(this.state.detailView){
           details =  <div className="eventPage__details">
+          <div className="eventPage__details__pad">
           <h4 className="eventPage__details__label">DATE</h4>
-          <h3 className="eventPage__details__info">{this.state.eventData.eventDate}</h3>
+          <h3 className="eventPage__details__info">{ mmddyyyy }</h3>
 
           <h4 className="eventPage__details__label">EVENT TYPE</h4>
           <h3 className="eventPage__details__info">{this.state.eventData.eventType}</h3>
@@ -171,6 +205,10 @@ export default class EventPage extends Component {
 
           <h4 className="eventPage__details__label">CONTACT</h4>
           <h3 className="eventPage__details__info">{this.state.eventData.contact}</h3>
+          </div>
+          <div className="eventPage__details__gallery">
+            <Gallery userPics={this.state.eventPics}/>
+          </div>
       </div>
       }
       
@@ -189,18 +227,11 @@ export default class EventPage extends Component {
       }
 //npm i array-sort to sort this array three times.
       let resultsMap;
-      console.log(this.state.resultsData)
-
       if(this.state.resultsView){
         let resultsArray = this.state.resultsData
-
        sort(resultsArray).asc([r => r.laptime.min,
                               r => r.laptime.sec,
-                              r => r.laptime.mil ] )
-        console.log(resultsArray)
-        // let sortedSec = sort(sortedMin).asc(r => r.laptime.sec)
-        // let sortedMil = sort(sortedSec).asc(r => r.laptime.mil)
-
+                              r => r.laptime.mil ])
          resultsMap = resultsArray.map((o) => {
           return <UserResultCard min={o.laptime.min}
                                  id={o.user_id}
@@ -214,10 +245,17 @@ export default class EventPage extends Component {
         addLap = <LaptimeAdder submitLap={this.lapFunc} />
       }
 
-
+      let addConfirm;
+      if(this.state.addEventConfirm){
+        addConfirm = <AddtoEventConfirm />
+        setTimeout(() => {
+          this.setState({addEventConfirm:false})
+        }, 5000)
+      }
     return (
       <div className="eventPage">
       { addLap }
+      { addConfirm }
         <div className="eventPage__header">         
             <div className="topnav">
                 <h3>RACEnet Event</h3>
@@ -251,6 +289,9 @@ export default class EventPage extends Component {
             { attendsMap }
         </div>
         <div className={this.state.resultsView ? "eventPage__results" : "hideme" }>
+            <button onClick={this.submitLaptimes} className="eventPage__results__btn">
+              <p>Submit Results</p>
+            </button>
             <div className="medalsflex">
               <div className="eventPage__results--first">
                 <img src={ medal } alt="" className="eventPage__results--first__icon"/>

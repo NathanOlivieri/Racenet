@@ -89,7 +89,7 @@
         &__img {
             width: 40px;
             height: 45px;
-            // box-sizing: border-box;
+            transform: rotate(180deg);
             padding: 23px 16px;
         }
         &__name {
@@ -134,9 +134,10 @@
         justify-content: flex-start;
         box-sizing: border-box;
         padding-top: 250px;
-        padding-left: 24px;
-        padding-right: 24px;
-        padding-bottom: 50px;
+        &__pad {
+            box-sizing: border-box;
+            padding: 16px;
+        }
         &__label {
             // margin: 16px 0 16px 0;
             margin:0;
@@ -182,22 +183,39 @@
         width: 300px;
         border: none;
         border-radius: 10px;
-        background: linear-gradient(140.83deg, rgb(104, 207, 255) 10.17%,
-        rgba(255, 255, 255, 0) 101.01%), #b1b1fc;
-        box-sizing: border-box;
+        background: linear-gradient(70.25deg, rgb(74, 255, 225) 0.98%, 
+        rgba(255, 255, 255, 0) 100%), rgb(107, 247, 118);
+    box-sizing: border-box;
         display: flex;
         justify-content: center;
         align-items: center;
-    }
+        }
     &__results {
         width: 100%;
-        height: 100vh;
         display:flex;
         flex-flow: column;
         justify-content: flex-start;
         box-sizing: border-box;
         padding-right: 24px;
         padding-bottom: 50px;
+        &__btn {
+            background: linear-gradient(70.25deg, rgb(74, 255, 225) 0.98%, 
+            rgba(255, 255, 255, 0) 100%), rgb(107, 247, 118);
+                position: absolute;
+            top: 230px;
+            width: 175px;
+            height: 50px;
+            border-radius: 28px;
+            border: none;
+            box-sizing: border-box;
+            margin-left: 99px;
+            margin-top: 15px;
+            p {
+                font-size:16px;
+                color: #303030;
+                font-weight: 600;
+            }
+        }
         &--first {
             height: 60px;
             width: 60px;
@@ -289,8 +307,12 @@
 
 .topnav {
     display: flex;
+    flex-direction: row-reverse;
     justify-content: space-between;
     margin-top: 8px
+}
+.topnav a {
+    width: 10%;
 }
 
 .topnav h3{
@@ -301,7 +323,7 @@
     line-height: normal;
     text-align: center;
     box-sizing: border-box;
-    padding-left: 16px;
+    padding-right: 22px;
     color: #323232;
 }
 .bgGold {
@@ -333,6 +355,19 @@
 .bgBronze {
     background: linear-gradient(238.39deg, rgb(253, 214, 170) 0%, 
     rgba(255, 255, 255, 0) 113.99%), #6C3400;
+    box-sizing: border-box;
+    padding: 4px 16px 8px 16px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    width: 326px;
+    height: 78px;
+    margin: 16px 0 16px 0;
+}
+.bgDefault {
+    background:linear-gradient(140.83deg, rgb(104, 207, 255) 10.17%,
+    rgba(255, 255, 255, 0) 101.01%), #b1b1fc;
     box-sizing: border-box;
     padding: 4px 16px 8px 16px;
     display: flex;
@@ -528,6 +563,11 @@
     flex-flow: column;
     justify-content: center;
     align-items: center;
+    &__labs {
+        display: flex;
+        width: 230px;
+        justify-content: space-around;
+    }
     &__flex{
         display: flex;
         flex-flow: row;
@@ -548,7 +588,7 @@
         align-items: center;
         padding-bottom: 3px;
         padding-left: 16px;
-        margin: 32px 8px 32px 0;
+        margin: 0px 8px 32px 0;
         margin-bottom: unset;
     }
     &__btn {
@@ -557,7 +597,7 @@
         border: none;
         border-radius: 7px;
         background: #323232;
-        margin: 32px 0 32px 0;
+        margin: 32px 0 32px 12px;
     }
     &__btn p{
         color: #fafafa;
@@ -565,8 +605,10 @@
 }
 
 .bgGoldres {
-    background: linear-gradient(239.25deg, #FDF0AA 0.98%, 
-    rgba(255, 255, 255, 0) 100%), #FFB74B;
+    background: linear-gradient(140.83deg, rgb(104, 207, 255) 10.17%,
+    rgba(255, 255, 255, 0) 101.01%), #b1b1fc;
+    // background: linear-gradient(239.25deg, #FDF0AA 0.98%, 
+    // rgba(255, 255, 255, 0) 100%), #FFB74B;
     box-sizing: border-box;
     padding: 4px 16px 8px 16px;
     display: flex;
@@ -605,4 +647,31 @@
     padding-top: 16px;
     margin: unset;
     font-size:16px;
+}
+
+//-------------------------------------confirm pop-up
+.confirm {
+    position: fixed;
+    bottom: 92px;
+    margin-left: 33px;
+    /* border-radius: 10px; */
+    /* transform: skewX(10deg); */
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    left: 16px;
+    height: 50px;
+    width: 271px;
+    background: linear-gradient(140.83deg, rgb(104, 207, 255) 10.17%,
+    rgba(255, 255, 255, 0) 101.01%), #b1b1fc;
+    z-index: 99999;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+}
+.confirm p {
+    color:#323232;
+    font-size: 18px;
+    margin:0;
+    height: 20px;
+    margin-top: 12px;
 }

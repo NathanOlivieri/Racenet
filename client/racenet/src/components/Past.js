@@ -18,7 +18,7 @@ export default class Past extends Component {
       <div className="pastEvents">
         <title className="title">
           <h2>PAST EVENTS/ RESULTS</h2>
-          <img src={arrowIcon} alt="navigate to upcomming events for current user" className="pastEvents__icon" />
+          {/* <img src={arrowIcon} alt="navigate to upcomming events for current user" className="pastEvents__icon" /> */}
         </title>
         <div className="pastEvents__list">
         { pastObjs } 

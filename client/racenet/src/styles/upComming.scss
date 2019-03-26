@@ -8,6 +8,7 @@
 }
 .up{
     // @include bg;
+    min-width:375px;
     &__icon{
         position: absolute;
         width: 44px;
@@ -17,7 +18,7 @@
         fill: white;
     }
     &__eventsList{
-        width: 100vw;
+        min-width:375px;
         height: auto;
         display: flex;
         flex-flow: column;

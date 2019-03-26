@@ -28,7 +28,7 @@ export default class UserCard extends Component {
     return (
       // <ScrollAnimation initiallyVisible="true" offset="200" animateIn="slideInleft" animateOut="slideOutRight">
       
-      <div className={this.setBGcolor()} id="x">
+      <div className={this.setBGcolor() || "bgDefault"} id="x">
        <div className="usercard--overlay"></div>
        <div className="usercard--shine"></div>
        
