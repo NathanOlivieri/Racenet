@@ -12,6 +12,9 @@ import AddtoEventConfirm from './AddtoEventConfirm'
 import sort from 'fast-sort';
 import Gallery from '../components/Gallery.js';
 import moment from 'moment';
+import { Spring, animated } from 'react-spring/renderprops'
+import ResultConfirm from './ResultConfirm'
+
 
 export default class EventPage extends Component {
     constructor(props) {
@@ -25,9 +28,10 @@ export default class EventPage extends Component {
           attendView: false,
           resultsView: false,
           showAddnew: false,
-          addEventConfirm: false
+          addEventConfirm: false,
+          resultsConfirm: false
         }
-      }
+    }
 
     componentDidMount() {
       window.scroll(0,0);
@@ -112,6 +116,25 @@ export default class EventPage extends Component {
         .then((rezu) => { 
           console.log(rezu.data)
           this.setState({addEventConfirm:true})
+          let eid = this.props.match.params.id
+          let geteventConfig = {
+            method: 'GET',
+            url: `http://localhost:8080/events/${eid}`
+          }
+          axios(geteventConfig)
+          .then((res) => {
+            this.setState({
+              eventData: res.data,
+              eventAttend: res.data.attending.length,
+              eventLoc: res.data.location.location,
+              eventVen: res.data.location.venue,
+              attendUsers: res.data.attending,
+              eventPics: res.data.pictures
+            })
+          })
+          .catch((err) => {
+            console.log(err)
+          })
         })
         .catch((err) => {
           console.log(err)
@@ -176,15 +199,21 @@ export default class EventPage extends Component {
           }
           axios(postPodium)
           .then((rezz) => { 
-            console.log(rezz.data)
+           
           })
           .catch((err) => {
             console.log(err)
-          })
+          }) 
+          this.setState({resultsConfirm:true})
       }
 
 
   render() {
+    let resultConfirm;
+    if(this.state.resultsConfirm){
+      resultConfirm = <ResultConfirm/>
+    }
+
     let edate = this.state.eventData.eventDate
     let mmddyyyy = moment(edate).format('MMMM Do YYYY');
       let details;
@@ -256,7 +285,16 @@ export default class EventPage extends Component {
       <div className="eventPage">
       { addLap }
       { addConfirm }
-        <div className="eventPage__header">         
+      { resultConfirm }
+
+      <Spring
+          from={{ opacity:0.1  }}
+          to={{ opacity:1}}
+          config={{duration:1000}}
+        >
+        { props => (
+          <animated.div style={props}>
+            <div className="eventPage__header">         
             <div className="topnav">
                 <h3>RACEnet Event</h3>
                 <Link to={"/events"} style={{ textDecoration: 'none' }}>
@@ -284,6 +322,9 @@ export default class EventPage extends Component {
                 </div>
             </nav>
         </div>
+          </animated.div>
+        )}
+        </Spring>
         { details }
         <div className="eventPage__attending">
             { attendsMap }
@@ -304,10 +345,6 @@ export default class EventPage extends Component {
               <div className="eventPage__results--third">
                 <img src={ medal } alt="" className="eventPage__results--first__icon"/>
                 <p>3rd</p>
-              </div>
-              <div className="eventPage__results--last">
-                <img src={ medal } alt="" className="eventPage__results--first__icon"/>
-                <p>PAR</p>
               </div>
             </div>
             { resultsMap }

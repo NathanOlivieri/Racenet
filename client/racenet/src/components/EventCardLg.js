@@ -4,6 +4,7 @@ import personIcon from '../person-icon.svg';
 import addIcon from '../person-add-icon.svg';
 import { Link } from 'react-router-dom';
 import moment from 'moment'
+import { Spring } from 'react-spring/renderprops'
 
 export default class EventCardLg extends Component {
   render() {
@@ -19,7 +20,20 @@ export default class EventCardLg extends Component {
     return (        
     <Link to={"/events/" + eid} title={eid} style={{ textDecoration: 'none' }}>
       <div className="eCardLg" data-aos="fade-left">
-        <div className="eCardLg--overlay"></div>
+
+
+        <Spring
+          from={{ transform:"rotate(45deg)"}}
+          to={{ transform:"rotate(0deg)" }}
+          config={{ duration:550 }}
+
+        >
+        { props => (
+          <div style={props}>
+            <div className="eCardLg--overlay"></div>
+          </div>
+        )}
+        </Spring>
 
         <div className="eCardLg__left">
             <p>{eObject.month}</p>

@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import Picture from './Picture';
 import CardPic from './CardPic';
 
-
 export default class EventCardMd extends Component {
   render() {
     let eid = this.props.id
@@ -29,11 +28,11 @@ export default class EventCardMd extends Component {
           <p>{this.props.attending}</p>
         </div>
         <p>Pictures</p>
+
         <div className="eCardGallery">
         {/* <div className="eCard--overlay"></div> */}
             { picturesJSX }
         </div>
-    
           {/* <img className="eCard__picture" src={ picturesJSX } alt="picture"/> */}
         {/* </div> */}
       </div>

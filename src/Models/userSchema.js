@@ -13,6 +13,9 @@ var userSchema = new Schema({
       country: String,
       city: String,
     },
+    description: {
+      type: String
+    },
     dateJoined: {
           type:Date,
           default:Date.now

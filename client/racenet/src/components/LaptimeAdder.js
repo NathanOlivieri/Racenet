@@ -13,6 +13,7 @@ export default class LaptimeAdder extends Component {
             <form onSubmit={ addLapTime } className="lap">
             <div className="lapCont">
                     <label className="lapCont__label" htmlfor="userLaptime">Enter Laptime</label>
+                    <div className="lapCont--overlay"></div>
                     <div className="lapCont__labs">
                       <p>Min</p>
                       <p>Sec</p>

@@ -6,6 +6,7 @@ import "animate.css/animate.min.css";
 import { Link } from 'react-router-dom';
 import addIcon from '../addLaptime.svg';
 import axios from 'axios';
+import { Spring } from 'react-spring/renderprops'
 
 export default class UserCard extends Component {
     constructor(props){
@@ -45,8 +46,6 @@ export default class UserCard extends Component {
       //color should be according to placement//
       <div className="bgGoldres" id="x">
        <div className="usercard--overlay"></div>
-       {/* <div className="usercard--shine"></div> */}
-       
         <img className="bgGoldres__pp" src={ profilePic } 
             alt="user Profile Pic"/>   
         <div className="bgGoldres__div">

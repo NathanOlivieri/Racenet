@@ -10,6 +10,9 @@ import Past from '../components/Past.js';
 import Gallery from '../components/Gallery.js';
 import Records from '../components/Records';
 import axios from 'axios';
+import moment from 'moment';
+import { useSpring, animated, } from 'react-spring'
+import { Spring } from 'react-spring/renderprops'
 export default class Profile extends Component {
   constructor() {
     super();
@@ -101,34 +104,47 @@ export default class Profile extends Component {
             key={object.id} />
           })          
     return (
-      <div className="profile">
-      <nav className="profile__nav">
-      <div className="profile__nav--overlay"></div>
-      <Link to={"/events"} style={{ textDecoration: 'none' }}>
-        <img className="profile__nav__icon" alt="meaningfulpicture" src={ navicon } 
-        alt="navigate to all event lists"/>
-        <img className="profile__nav__logo" alt="meaningfulpicture" src={ logo }></img>
-      </Link>
-      </nav>
-        <div className={this.setBGcolor() || "proDefault"}>
-            <img className="profile__hero__pp" alt="meaningfulpicture" src={ profilePic } alt="user Profile Pic"/>
-            <h1 className="profile__hero__h1">{this.state.userData.name}</h1>
-            <img src={ medal } alt="medalicon" className="profile__hero__medal"/>
-            <img className="profile__nav__logo" alt="meaningfulpicture" src={ logo }></img>
-            <Records userData={this.state.userData}/>
-        </div>
-
-        <div className="profile__upcoming">
-            { upcomingObjs }
-        </div>
-        <div className="profile__past">
-            <Past userEvents={this.state.userEvents} />
-            {/* this is now getting a list of objects insttead of ids */}
-        </div>
-        <div className="profile__gallery">
-            <Gallery userPics={this.state.userPics}/>
-        </div>
-      </div>
+      <Spring
+        from={{ opacity:0, marginTop: -500  }}
+        to={{ opacity:1, marginTop:0 }}
+        config={{ duration: 550 }}
+      >
+        { props => (
+          <div style={props}>
+            <div className="profile">
+              <nav className="profile__nav">
+              <div className="profile__nav--overlay"></div>
+              <Link to={"/events"} style={{ textDecoration: 'none' }}>
+                <img className="profile__nav__icon" alt="meaningfulpicture" src={ navicon } 
+                alt="navigate to all event lists"/>
+              </Link>
+              <Link to={"/"} style={{ textDecoration: 'none' }}>
+                <img className="profile__nav__logo" alt="meaningfulpicture" src={ logo }></img>
+              </Link>
+              </nav>
+                <div className={this.setBGcolor() || "proDefault"}>
+                    <img className="profile__hero__pp" alt="meaningfulpicture" src={ profilePic } alt="user Profile Pic"/>
+                    <h1 className="profile__hero__h1">{this.state.userData.name}</h1>
+                    <p className="description">{this.state.userData.description}</p>
+                    <img src={ medal } alt="medalicon" className="profile__hero__medal"/>
+                    <img className="profile__nav__logo" alt="meaningfulpicture" src={ logo }></img>
+                    <Records userData={this.state.userData}/>
+                </div>
+                
+                <div className="profile__upcoming">
+                    { upcomingObjs }
+                </div>
+                <div className="profile__past">
+                    <Past userEvents={this.state.userEvents} />
+                    {/* this is now getting a list of objects insttead of ids */}
+                </div>
+                <div className="profile__gallery">
+                    <Gallery userPics={this.state.userPics}/>
+                </div>
+              </div>
+          </div>
+        )}
+      </Spring>
     )
   }
 }
